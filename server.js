@@ -1,8 +1,15 @@
 const express = require('express');
-const app = express();
-const port = 8000
+const compression = require('compression')
+const cors = require('cors');
 
-app.use('/product/:id', express.static(`${__dirname}/./public`))
+const app = express();
+
+app.use(cors());
+app.use(compression());
+
+const port = 8000;
+
+app.use(express.static(`${__dirname}/public`))
 
 app.get('*', (req, res) => {
   res.sendFile(`${__dirname}/public/index.html`)
